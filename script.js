@@ -73,6 +73,32 @@ document.getElementById("yearSelect").addEventListener("change", function () {
 
 // Export to PDF functionality
 document.getElementById("exportPdf").addEventListener("click", function () {
-  // Implement export to PDF logic here
-  alert("Export to PDF feature needs to be implemented");
+  html2canvas(document.body, {
+    scale: 1, // Adjust scale as needed
+    useCORS: true,
+  }).then(function (canvas) {
+    // Dimensions of the entire canvas
+    let canvasWidth = canvas.width;
+    let canvasHeight = canvas.height;
+
+    // Initialize jsPDF in landscape mode to fit wider content
+    let pdf = new jspdf.jsPDF({
+      orientation: canvasWidth > canvasHeight ? "l" : "p",
+      unit: "pt",
+      format: [canvasWidth, canvasHeight],
+    });
+
+    // Add the image to PDF
+    pdf.addImage(
+      canvas.toDataURL("image/png"),
+      "PNG",
+      0,
+      0,
+      canvasWidth,
+      canvasHeight
+    );
+
+    // Save the PDF
+    pdf.save("calendar.pdf");
+  });
 });

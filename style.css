@@ -12,6 +12,17 @@ body {
 #calendar {
   width: 80%;
   background-color: #1a1a1a; /* Slightly lighter background for the calendar */
+  min-height: 500px; /* Fixed height */
+  max-height: 500px; /* Ensure the height does not grow */
+  overflow: auto; /* Add scroll for overflow content */
+  font-size: 12px; /* Default font size */
+}
+
+.note li {
+  white-space: nowrap; /* Keep the list items in single lines */
+  overflow: hidden; /* Hide overflow text */
+  text-overflow: ellipsis; /* Add ellipsis for overflow text */
+  font-size: inherit; /* Inherit font size from parent */
 }
 
 .calendar-day {
